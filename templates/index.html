@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Complaint Ticket Desk</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="{{ url_for('static', filename='js/app.js') }}" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Complaint Ticket Desk home">
+      <span class="brand-mark">CT</span>
+      <span>Complaint Ticket Desk</span>
+    </a>
+    <span class="live-indicator"><i></i> System online</span>
+  </header>
+
+  <main class="page-shell">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">HOSTEL SUPPORT PORTAL</p>
+        <h1>Make your stay<br><span>better.</span></h1>
+        <p class="hero-copy">Report an issue, keep your ticket number, and follow its progress from one place.</p>
+      </div>
+      <div class="hero-note"><span class="note-icon">✳</span><span>Every report gets a unique<br>ticket number for tracking.</span></div>
+    </section>
+
+    <section class="stats-grid" aria-label="Complaint overview">
+      <article class="stat-card"><span class="stat-label">OPEN TICKETS</span><strong id="stat-open">—</strong><span class="stat-foot">Waiting for attention</span></article>
+      <article class="stat-card"><span class="stat-label">IN PROGRESS</span><strong id="stat-progress">—</strong><span class="stat-foot">Being worked on</span></article>
+      <article class="stat-card"><span class="stat-label">RESOLVED</span><strong id="stat-closed">—</strong><span class="stat-foot">Successfully closed</span></article>
+      <article class="stat-card stat-total"><span class="stat-label">TOTAL REPORTS</span><strong id="stat-total">—</strong><span class="stat-foot">Across all categories</span></article>
+    </section>
+
+    <section class="work-grid">
+      <article class="panel form-panel">
+        <div class="panel-heading"><div><p class="eyebrow">STUDENT PORTAL</p><h2>Report an issue</h2></div><span class="step-badge">01</span></div>
+        <p class="panel-intro">Tell us what needs attention. Fields marked with * are required.</p>
+        <form id="complaint-form">
+          <div class="field-row">
+            <label>Your name *<input name="student_name" required maxlength="120" placeholder="e.g. Rahul Sharma"></label>
+            <label>Room number *<input name="room_no" required maxlength="30" placeholder="e.g. A-204"></label>
+          </div>
+          <label>Issue category *<select name="cat_id" id="category-select" required><option value="">Loading categories…</option></select></label>
+          <label>Describe the issue *<textarea name="description" required rows="4" maxlength="2000" placeholder="Please share enough detail for the team to help…"></textarea></label>
+          <button class="button button-primary" type="submit">Submit complaint <span aria-hidden="true">↗</span></button>
+          <p id="submit-message" class="feedback" role="status" aria-live="polite"></p>
+        </form>
+      </article>
+
+      <article class="panel track-panel">
+        <div class="panel-heading"><div><p class="eyebrow">QUICK LOOKUP</p><h2>Track a ticket</h2></div><span class="step-badge">02</span></div>
+        <p class="panel-intro">Enter the ticket number you received when submitting your complaint.</p>
+        <form id="track-form" class="track-form">
+          <label class="sr-only" for="ticket-number">Ticket number</label>
+          <input id="ticket-number" type="number" min="1" required placeholder="Enter ticket number">
+          <button class="button button-dark" type="submit">Track ticket</button>
+        </form>
+        <div id="ticket-result" class="ticket-result empty-state">Your ticket details will appear here.</div>
+        <div class="track-tip"><span>i</span><span>Keep your ticket number safe. You can use it any time to check progress.</span></div>
+      </article>
+    </section>
+
+    <section class="panel warden-panel">
+      <div class="panel-heading warden-heading">
+        <div><p class="eyebrow">WARDEN DESK</p><h2>Complaint queue</h2><p class="panel-intro">Review submitted complaints and move each ticket through its status.</p></div>
+        <label class="filter-label">FILTER BY STATUS
+          <select id="status-filter"><option value="">All tickets</option><option>Open</option><option>In progress</option><option>Closed</option></select>
+        </label>
+      </div>
+      <div class="table-wrap">
+        <table><thead><tr><th>TICKET</th><th>STUDENT / ROOM</th><th>ISSUE</th><th>STATUS</th><th>NEXT STEP</th></tr></thead>
+          <tbody id="ticket-list"><tr><td colspan="5" class="empty-cell">Loading complaints…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+    <footer><span>Complaint Ticket Desk</span><span>Student support, made easier.</span></footer>
+  </main>
+</body>
+</html>
